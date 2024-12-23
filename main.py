@@ -4,6 +4,16 @@ import base64
 
 # Şifreleme fonksiyonu
 def encode(key, clear):
+    """
+    Verilen bir anahtar (key) ve düz metni (clear), şifreli bir metne dönüştürür.
+
+    Args:
+        key (str): Şifreleme için kullanılan anahtar.
+        clear (str): Şifrelenecek düz metin.
+
+    Returns:
+        str: Base64 formatında şifrelenmiş metin.
+    """
     enc = []
     for i in range(len(clear)):
         key_c = key[i % len(key)]
@@ -13,6 +23,16 @@ def encode(key, clear):
 
 # Şifre çözme fonksiyonu
 def decode(key, enc):
+    """
+    Verilen bir anahtar (key) ve şifrelenmiş metni (enc), düz metne çözer.
+
+    Args:
+        key (str): Şifre çözme için kullanılan anahtar.
+        enc (str): Şifrelenmiş metin (Base64 formatında).
+
+    Returns:
+        str: Çözülen düz metin.
+    """
     dec = []
     enc = base64.urlsafe_b64decode(enc).decode()
     for i in range(len(enc)):
@@ -23,6 +43,16 @@ def decode(key, enc):
 
 # Dosyayı kaydetme ve şifreleme fonksiyonu
 def save_and_encrypt():
+    """
+    Kullanıcıdan alınan başlık, gizli not ve anahtar bilgilerini kullanarak notu şifreler
+    ve bir dosyaya kaydeder.
+
+    Dosya adı, kullanıcı tarafından girilen başlığa göre oluşturulur. Şifreleme işlemi
+    için `encode` fonksiyonu kullanılır.
+
+    Raises:
+        messagebox.showerror: Gerekli alanlar boş bırakıldığında veya işlem sırasında hata oluştuğunda hata mesajı gösterir.
+    """
     my_title = title_entry.get().strip()
     message = input_text.get("1.0", END).strip()
     master_key = master_secret_input.get().strip()
@@ -52,6 +82,15 @@ def save_and_encrypt():
 
 # Şifre çözme fonksiyonu
 def decrypt():
+    """
+    Kullanıcıdan alınan dosya adı ve anahtar bilgilerini kullanarak, şifrelenmiş bir dosyadaki
+    içeriği çözer ve kullanıcıya gösterir.
+
+    Dosya okuma işlemi sırasında dosya bulunamazsa veya şifre çözme işlemi başarısız olursa hata mesajı gösterir.
+
+    Raises:
+        messagebox.showerror: Gerekli alanlar boş bırakıldığında veya işlem sırasında hata oluştuğunda hata mesajı gösterir.
+    """
     file_path = title_entry.get().strip()
     master_key = master_secret_input.get().strip()
 
