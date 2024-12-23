@@ -53,7 +53,7 @@ def coz():
 
 # Tkinter Arayüz
 pencere = tk.Tk()
-pencere.title("Şifreli Notlar")
+pencere.title("Secret Notes")
 pencere.geometry("400x600")
 
 # Resim ekleme
