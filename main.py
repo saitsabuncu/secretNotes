@@ -1,88 +1,39 @@
-import tkinter as tk
-from tkinter import ttk, messagebox
-from PIL import Image, ImageTk  # Resim işlemleri için
+from tkinter import *
 
-# XOR Şifreleme ve Çözme Fonksiyonları
-import base64
+FONT = ('Verdana',20,'normal')
+my_window = Tk()
+my_window.title('Secret Notes')
+my_window.config(padx=30, pady=30)
 
-def xor_sifrele(mesaj, anahtar):
-    sifreli_mesaj = ''.join(chr(ord(c) ^ ord(anahtar[i % len(anahtar)])) for i, c in enumerate(mesaj))
-    return base64.b64encode(sifreli_mesaj.encode()).decode()
+#UI
+my_foto = PhotoImage(file="secretNotes.png")
+#photo_label = Label(image=my_foto)
+#photo_label.pack()
 
-def xor_coz(sifreli_mesaj, anahtar):
-    try:
-        mesaj = base64.b64decode(sifreli_mesaj).decode()
-        cozulmus_mesaj = ''.join(chr(ord(c) ^ ord(anahtar[i % len(anahtar)])) for i, c in enumerate(mesaj))
-        return cozulmus_mesaj
-    except Exception as e:
-        return f"Hata: {str(e)}"
+canvas = Canvas(height=200, width=200)  # Görsel boyutuna göre ayarla
+canvas.create_image(100, 100, image=my_foto)  # Koordinatları ortala
+canvas.pack()
 
-# Kaydet ve Şifrele Fonksiyonu
-def kaydet_ve_sifrele():
-    baslik = baslik_girisi.get()
-    mesaj = not_girisi.get("1.0", tk.END).strip()
-    master_key = anahtar_girisi.get().strip()
+title_info_label = Label(text='Enter your title',font=FONT)
+title_info_label.pack()
+title_entry = Entry(width=30)
+title_entry.pack()
 
-    if not baslik or not mesaj or not master_key:
-        messagebox.showwarning("Uyarı", "Lütfen tüm alanları doldurun!")
-        return
+input_info_label = Label(text='Enter your secret',font=FONT)
+input_info_label.pack()
+input_text = Text(width=50, height=25)
+input_text.pack()
 
-    sifreli_mesaj = xor_sifrele(mesaj, master_key)
-    with open(f"{baslik}.txt", "w", encoding="utf-8") as dosya:
-        dosya.write(sifreli_mesaj)
+master_secret_label = Label(text='Enter master key',font=FONT)
+master_secret_label.pack()
+master_secret_input = Entry(width=30)
+master_secret_input.pack()
 
-    messagebox.showinfo("Başarılı", f"Not '{baslik}' başarıyla şifrelendi ve kaydedildi!")
-
-# Çözme Fonksiyonu
-def coz():
-    baslik = baslik_girisi.get()
-    master_key = anahtar_girisi.get().strip()
-
-    try:
-        with open(f"{baslik}.txt", "r", encoding="utf-8") as dosya:
-            sifreli_mesaj = dosya.read()
-
-        cozulmus_mesaj = xor_coz(sifreli_mesaj, master_key)
-        not_girisi.delete("1.0", tk.END)
-        not_girisi.insert(tk.END, cozulmus_mesaj)
-        messagebox.showinfo("Başarılı", f"Not '{baslik}' başarıyla çözüldü!")
-    except FileNotFoundError:
-        messagebox.showerror("Hata", f"Not '{baslik}' bulunamadı!")
-    except Exception as e:
-        messagebox.showerror("Hata", f"Bir hata oluştu: {str(e)}")
-
-# Tkinter Arayüz
-pencere = tk.Tk()
-pencere.title("Secret Notes")
-pencere.geometry("400x600")
-
-# Resim ekleme
-resim_dosyasi = "secret notes.png"  # Resminizin tam dosya yolunu yazın
-resim = Image.open(resim_dosyasi)
-resim = resim.resize((100, 100), Image.LANCZOS)  # Yeni Pillow sürümleri için LANCZOS
-resim_tk = ImageTk.PhotoImage(resim)
-
-resim_etiketi = tk.Label(pencere, image=resim_tk)
-resim_etiketi.pack(pady=10)
+save_button = Button(text='Save & Encrypt')
+save_button.pack()
+decrypt_button = Button(text='Decrypt')
+decrypt_button.pack()
 
 
-# Başlık girişi
-ttk.Label(pencere, text="Enter your title").pack(pady=10)
-baslik_girisi = ttk.Entry(pencere, width=40)
-baslik_girisi.pack(pady=10)
 
-# Not girişi
-ttk.Label(pencere, text="Enter your secret").pack(pady=10)
-not_girisi = tk.Text(pencere, wrap=tk.WORD, height=10, width=40)
-not_girisi.pack(pady=10)
-
-# Anahtar girişi
-ttk.Label(pencere, text="Enter master key").pack(pady=10)
-anahtar_girisi = ttk.Entry(pencere, show="*", width=40)
-anahtar_girisi.pack(pady=10)
-
-# Butonlar
-ttk.Button(pencere, text="Save & Encrypt", command=kaydet_ve_sifrele).pack(pady=10)
-ttk.Button(pencere, text="Decrypt", command=coz).pack(pady=10)
-
-pencere.mainloop()
+my_window.mainloop()
