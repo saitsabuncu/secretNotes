@@ -2,33 +2,6 @@ from tkinter import *
 from tkinter import messagebox  # Kullanıcıya mesaj göstermek için
 import os  # Dosya işlemleri için
 
-FONT = ('Verdana',20,'normal')
-my_window = Tk()
-my_window.title('Secret Notes')
-my_window.config(padx=30, pady=30)
-
-#UI
-my_foto = PhotoImage(file="secretNotes.png")
-
-canvas = Canvas(height=200, width=200)  # Görsel boyutuna göre ayarla
-canvas.create_image(100, 100, image=my_foto)  # Koordinatları ortala
-canvas.pack()
-
-title_info_label = Label(text='Enter your title',font=FONT)
-title_info_label.pack()
-title_entry = Entry(width=30)
-title_entry.pack()
-
-input_info_label = Label(text='Enter your secret',font=FONT)
-input_info_label.pack()
-input_text = Text(width=50, height=25)
-input_text.pack()
-
-master_secret_label = Label(text='Enter master key',font=FONT)
-master_secret_label.pack()
-master_secret_input = Entry(width=30)
-master_secret_input.pack()
-
 
 # Dosyayı kaydetme fonksiyonu
 def save_and_encrypt():
@@ -59,6 +32,36 @@ def save_and_encrypt():
 
     except Exception as e:
         messagebox.showerror("Hata", f"Dosya kaydedilirken bir hata oluştu: {e}")
+
+#UI
+FONT = ('Verdana',20,'normal')
+my_window = Tk()
+my_window.title('Secret Notes')
+my_window.config(padx=30, pady=30)
+
+my_foto = PhotoImage(file="secretNotes.png")
+
+canvas = Canvas(height=200, width=200)  # Görsel boyutuna göre ayarla
+canvas.create_image(100, 100, image=my_foto)  # Koordinatları ortala
+canvas.pack()
+
+title_info_label = Label(text='Enter your title',font=FONT)
+title_info_label.pack()
+title_entry = Entry(width=30)
+title_entry.pack()
+
+input_info_label = Label(text='Enter your secret',font=FONT)
+input_info_label.pack()
+input_text = Text(width=50, height=25)
+input_text.pack()
+
+master_secret_label = Label(text='Enter master key',font=FONT)
+master_secret_label.pack()
+master_secret_input = Entry(width=30)
+master_secret_input.pack()
+
+
+
 
 
 # Şifre Çözme Fonksiyonu (örnek)
