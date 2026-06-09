@@ -128,13 +128,3 @@ This project was developed for learning purposes. It demonstrates basic text obf
 ## ✨ İletişim
 
 Herhangi bir soru veya öneriniz varsa lütfen [sait.sabuncu@hotmail.com](sait.sabuncu@hotmail.com) üzerinden iletişime geçin.
-```
-
----
-
-### **README.md İçeriği Hakkında**
-- **Açıklayıcı Başlangıç**: Uygulamanın amacını net bir şekilde anlatır.
-- **Kullanım Talimatları**: Uygulamayı nasıl çalıştıracağınızı açıklar.
-- **Proje Yapısı**: Dosyaların ne işe yaradığını açıklar.
-- **Kod Örnekleri**: Öne çıkan kod parçalarını içerir.
-- **Katkı ve Lisans**: Projenize katkı yapmak isteyenler için rehber sunar.
