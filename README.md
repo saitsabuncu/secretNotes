@@ -91,7 +91,7 @@ def decode(key, enc):
 
 - **Python**
 - **Tkinter**: Arayüz geliştirme
-- **Base64**: Şifreleme işlemleri
+- **Base64**: Şifrelenmiş/kodlanmış metni dosyaya uygun formatta saklamak için kullanılmıştır.
 
 ---
 
@@ -116,6 +116,12 @@ Katkıda bulunmak istiyorsanız:
 3. Değişikliklerinizi yapın ve commitleyin: `git commit -m 'Yeni özellik ekle'`.
 4. Dalınızı push edin: `git push origin yeni-ozellik`.
 5. Bir Pull Request açın.
+
+---
+
+## Security Note
+
+This project was developed for learning purposes. It demonstrates basic text obfuscation and encoding techniques. It should not be used to store highly sensitive or confidential information.
 
 ---
 
